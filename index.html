@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="thinnavbar.css" media="screen and (max-width: 1000px)" type="text/css"></link>
+        <link rel="stylesheet" href="widenavbar.css" media="screen and (min-width: 1001px)" type="text/css"></link>
+        <link rel="stylesheet" href="main.css" type="text/css"></link>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" type="text/css"></link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css"></link>
+        <link href='https://fonts.googleapis.com/css?family=Baloo Thambi 2' rel='stylesheet' type="text/css"></link>
+        <link href='https://fonts.googleapis.com/css?family=Exo 2' rel='stylesheet' type="text/css"></link>
+        <link href='https://fonts.googleapis.com/css?family=Alegreya Sans SC' rel='stylesheet' type="text/css"></link>
+        <link href='https://fonts.googleapis.com/css?family=Cinzel' rel='stylesheet' type="text/css"></link>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin="" type="text/javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
+        <script src='https://kit.fontawesome.com/a076d05399.js' type="text/javascript"></script>
+    </head>
+    <body>
+        <div class="t-cont">
+            <div class="topnav" id="topnav">
+                <div class="dropdown">
+                    <button class="dropbtn" onclick="showHome()">Home</button>
+                </div>
+                <div class="dropdown" onmouseover="droppax()">
+                    <button class="dropbtn">Pax
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                </div>
+                <div class="dropdown" onmouseover="dropcargo()">
+                    <button class="dropbtn">Cargo
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                </div>
+                <div class="dropdown" onmouseover="droproute()">
+                    <button class="dropbtn">Routes
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                </div>
+                <div class="dropdown" onmouseover="dropother()">
+                    <button class="dropbtn">Other
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Guides</button><!--Add guide library stuff here-->
+                </div>
+                <div class="dropdown" onmouseover="droplang()">
+                    <button class="dropbtn">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/200px-Flag_of_the_United_States.svg.png" class="topimg"></img>
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn" onclick="showAbout()">About</button>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn" onclick="showFaq()">FAQ</button>
+                </div>
+                <button class="textbtn" onclick="showAm4()"><div>Airline Manager 4</div>
+                    <img src="https://www.airline4.net/assets/img/logos/am_logo.png" class="amlogo"></img>
+                </button>
+            </div>
+            <div class="dropdown2" onmouseleave="paxUp()" style="display: none;">
+                <a href="javascript:void(0)" onclick='showPaxTicket()'>Ticket Price</a>
+                <a href="javascript:void(0)" onclick="showPaxConfig()">Configuration</a>
+                <a href="javascript:void(0)" onclick="showPaxProfit()">Profit</a>
+            </div>
+            <div class="dropdown3" onmouseleave="cargoUp()" style="display: none;">
+                <a href="javascript:void(0)" onclick="showCTicket()">Ticket Price</a>
+                <a href="javascript:void(0)" onclick="showCConfig()">Configuration</a>
+                <a href="javascript:void(0)" onclick="showCProfit()">Profit</a>
+            </div>
+            <div class="dropdown6" onmouseleave="routeUp()" style="display: none;">
+                <a href="javascript:void(0)" onclick="showStopover()">Stopover Finder</a>
+                <a href="javascript:void(0)" onclick="showMFind()">Market% Finder Tool</a>
+                <a href="javascript:void(0)" onclick="showMMap()">Market% Map</a>
+            </div>
+            <div class="dropdown4" onmouseleave="otherUp()" style="display: none;">
+                <a href="javascript:void(0)" onclick="showACSearch()">A/C Search</a>
+                <a href="javascript:void(0)" onclick="showResellCalc()">Resell Value</a>
+            </div>
+            <div class="dropdown5" onmouseleave="langUp()" style="display: none;">
+                <!--<a href="javascript:void(0)" onclick="alert('Language already set to English.')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/200px-Flag_of_the_United_States.svg.png" class="topimg"></img> English</a>-->
+                <a href="javascript:void(0)" onclick="alert('Will be added soon.')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/200px-Flag_of_Germany.svg.png" class="topimg"></img> German</a>
+                <a href="javascript:void(0)" onclick="alert('Will be added soon.')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Spain.svg/200px-Flag_of_Spain.svg.png" class="topimg"></img> Spanish</a>
+                <a href="javascript:void(0)" onclick="alert('Will be added soon.')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/200px-Flag_of_France.svg.png" class="topimg"></img> French</a>
+            </div>
+            <div class="mobile-nav">
+                <div class="main-btns">
+                    <a href="javascript:void(0)" class="navbtn" id="navbtn" onclick="mainContentSlide()">
+                        <i class="fa fa-bars" id="nav-icon"></i>
+                    </a>
+                    <button href="javascript:void(0)" class="t-btn" onclick="showAm4()">Airline Manager 4
+                        <img src="https://www.airline4.net/assets/img/logos/am_logo.png" class="amlogo"></img>
+                    </button>
+                    <div class="drop-m-content">
+                        <div class="drop-style-box">
+                            <div class="drop-scd-box">
+                                <div class="home-m">
+                                    <button class="homebtn" onclick="showHome(); mainContentUp()">Home</button>
+                                </div>
+                                <div class="pax-m-drop">
+                                    <button class="m-dropbtn" onclick="pDrop()">Pax
+                                        <i class="fa fa-caret-down"></i>
+                                    </button>
+                                    <div class="drop-content2">
+                                        <div class="drop-c">
+                                            <a href="javascript:void(0)" onclick='showPaxTicket(); mainContentUp()'>Ticket Price</a>
+                                            <a href="javascript:void(0)" onclick="showPaxConfig(); mainContentUp()">Configuration</a>
+                                            <a href="javascript:void(0)" onclick="showPaxProfit(); mainContentUp()">Profit</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cargo-m-drop">
+                                    <button class="m-dropbtn" onclick="cDrop()">Cargo
+                                        <i class="fa fa-caret-down"></i>
+                                    </button>
+                                    <div class="drop-content3">
+                                        <div class="drop-c">
+                                            <a href="javascript:void(0)" onclick="showCTicket(); mainContentUp()">Ticket Price</a>
+                                            <a href="javascript:void(0)" onclick="showCConfig(); mainContentUp()">Configuration</a>
+                                            <a href="javascript:void(0)" onclick="showCProfit(); mainContentUp()">Profit</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="routes-m-drop">
+                                    <button class="m-dropbtn" onclick="rDrop()">Routes
+                                        <i class="fa fa-caret-down"></i>
+                                    </button>
+                                    <div class="drop-content4">
+                                        <div class="drop-c">
+                                            <a href="javascript:void(0)" onclick="showStopover(); mainContentUp()">Stopover Finder</a>
+                                            <a href="javascript:void(0)" onclick="showMFind(); mainContentUp()">Market% Finder Tool</a>
+                                            <a href="javascript:void(0)" onclick="showMMap(); mainContentUp()">Market% Map</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="other-m-drop">
+                                    <button class="m-dropbtn" onclick="oDrop()">Other
+                                        <i class="fa fa-caret-down"></i>
+                                    </button>
+                                    <div class="drop-content5">
+                                        <div class="drop-c">
+                                            <a href="javascript:void(0)" onclick="showACSearch(); mainContentUp()">A/C Search</a>
+                                            <a href="javascript:void(0)" onclick="showResellCalc(); mainContentUp()">Resell Value</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="guides-m">
+                                    <button class="guidebtn">Guides</button><!--guide stuff-->
+                                </div>
+                                <div class="lang-m-drop">
+                                    <button class="langbtn" onclick="lDrop()">
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/200px-Flag_of_the_United_States.svg.png" class="topimg"></img> English
+                                        <i class="fa fa-caret-down"></i>
+                                    </button>
+                                    <div class="drop-content6">
+                                        <div class="drop-c">
+                                            <!--<a class="lang-a" href="javascript:void(0)" onclick="alert('Language already set to English.')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/200px-Flag_of_the_United_States.svg.png" class="topimg"></img> English</a>-->
+                                            <a class="lang-a" href="javascript:void(0)" onclick="alert('Will be added soon.'); mainContentUp()"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/200px-Flag_of_Germany.svg.png" class="topimg"></img> German</a>
+                                            <a class="lang-a" href="javascript:void(0)" onclick="alert('Will be added soon.'); mainContentUp()"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Spain.svg/200px-Flag_of_Spain.svg.png" class="topimg"></img> Spanish</a>
+                                            <a class="lang-a" href="javascript:void(0)" onclick="alert('Will be added soon.'); mainContentUp()"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/200px-Flag_of_France.svg.png" class="topimg"></img> French</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="about-m">
+                                    <button class="aboutbtn" onclick="showAbout(); mainContentUp()">About</button>
+                                </div>
+                                <div class="faq-m">
+                                    <button class="faqbtn" onclick="showFaq(); mainContentUp()">FAQ</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="alert" id="al" style="display: none">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                Please fill in everything correctly!
+            </div> 
+            <div class="total-content" style="text-align: center" onmouseover="footerDown()">
+                <div class="content">
+                    <div id="home">
+                        <div class="h-header">
+                            Our AM4info website is finally released!
+                        </div>
+                        <div class="b-scr-read-box">
+                            <p style="margin-left: 18px; margin-right: 18px; margin-top: 18px;" id="h-tit-txt">
+                                Efficient.<br>
+                                Reliable.<br>
+                                Fast.<br>
+                                AM4 Tools new defined.
+                            </p>
+                            <p style="margin-left: 18px; margin-right: 18px;" id="h-main-txt">
+                                After almost 3 months of development, we are proud to announce the completion of a new and
+                                improved tool website for Xombat Airline Manager 4. We added a few new features along with
+                                very well known standard tools like the ticket price calculator or the seat configurator:
+                            </p>
+                            <dl style="margin-left: 18px; margin-right: 18px" id="featList">
+                                <dt class="upperElement">Guide Library</dt>
+                                <dd class="lowerElement">A place to collect useful guides for AM4. You can upload your guide 
+                                    <a href="javascript:void(0)" onclick="showGuideUpl()">here</a>, please follow our <a href="javascript:void(0)" onclick="showGuideRules()">guide upload rules</a>.
+                                </dd>
+                                    
+                                <dt class="upperElement">Language Menu</dt>
+                                <dd class="lowerElement">
+                                    English is not your mother tongue and you can barely understand it?
+                                    Well, no problem. We decided to translate the website into several languages.
+                                    If there's currently no translation available for your language, you can click 
+                                    <a href="showLangTransl()">here</a> to add it!
+                                </dd>
+
+                                <dt class="upperElement">Feature Suggestion/Bug Report</dt>
+                                <dd class="lowerElement">
+                                    You have a cool new idea for a tool that might be useful? Or just an idea to improve the website?<br>
+                                    We are always open for new ideas, please message us <a href="javascript:void(0)" onclick="showBugReport()">here</a>.
+                                </dd>
+
+                                <dt class="upperElement">Join the Community!</dt>
+                                <dd class="lowerElement">
+                                    We have a well established <a href="https://www.facebook.com/groups/AirlineManager4">Facebook Server</a>
+                                    and a <a href="">Discord Server</a>; all tools from the website are also available on Discord.
+                                </dd>
+
+                                <dt class="upperElement">Get your own Discord Bot!</dt>
+                                <dd class="lowerElement">
+                                        Since many of you also have private Discord servers, such as an alliance discord server, it is also 
+                                        possible to <a href="javascript: void(0)" onclick="showBotAdd()">add the AM4info Bot to your own server</a>.
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div id="paxticket" class="hide">
+                        <h4>PAX Ticket Calculator</h4>
+    
+                        <label for="distancePaxTicket">Route Distance</label>
+                        <input type="text" id="distancePaxTicket" placeholder="Distance (km)" maxlength="5" class="form-control" oninput="filterInput(this)"><br>
+    
+                        <button onclick="paxticket()">Calculate!</button><br><br>
+    
+                        <!--<div style="display: inline-block; margin-right: 15px;">
+                            <label for="yTicketRealism">Economy Class (Realism)</label>
+                            <input type="text" id="yTicketRealism" class="form-control" readonly><br>
+        
+                            <label for="jTicketRealism">Business Class (Realism)</label>
+                            <input type="text" id="jTicketRealism" class="form-control" readonly><br>
+        
+                            <label for="fTicketRealism">First Class (Realism)</label>
+                            <input type="text" id="fTicketRealism" class="form-control" readonly><br>
+                        </div>
+                        <div style="display: inline-block; margin-left: 15px;">
+                            <label for="yTicketEasy">Economy Class (Easy)</label>
+                            <input type="text" id="yTicketEasy" class="form-control" readonly><br>
+    
+                            <label for="jTicketEasy">Business Class (Easy)</label>
+                            <input type="text" id="jTicketEasy" class="form-control" readonly><br>
+                        
+                            <label for="fTicketEasy">First Class (Easy)</label>
+                            <input type="text" id="fTicketEasy" class="form-control" readonly><br>
+                        </div>-->
+                    </div>
+                    <div id="paxconfig" class="hide">
+                        <h4>PAX Seat Calculator</h4>
+    
+                        <!--<select id="modeSSeat" class="form-control">
+                            <option>Realism</option>
+                            <option>Easy</option>
+                        </select><br>
+    
+                        <select id="cModeSeat" class="form-control">
+                            <option>Normal</option>
+                            <option>Max. Demand Usage</option>
+                        </select><br>-->
+    
+                        <label for="capacitySeat">Capacity</label>
+                        <input type="text" id="capacitySeat" placeholder="Capacity" maxlength="3" class="form-control" oninput="filterInput(this)"><br>
+    
+                        <label for="distanceSeat">Route Distance</label>
+                        <input type="text" id="distanceSeat" placeholder="Distance (km)" maxlength="5" class="form-control" oninput="filterInput(this)"><br>
+    
+                        <label for="flDaySeat">Flights Per Day</label>
+                        <input type="text" id="flDaySeat" placeholder="Flights Per Day" maxlength="2" class="form-control" oninput="filterInput(this)"><br>
+    
+                        <label for="yDemandSeat">Y-Class Demand</label>
+                        <input type="text" id="yDemandSeat" placeholder="Y-Class Demand" maxlength="4" class="form-control" oninput="filterInput(this)"><br>
+                        
+                        <label for="jDemandSeat">J-Class Demand</label>
+                        <input type="text" id="jDemandSeat" placeholder="J-Class Demand" maxlength="4" class="form-control" oninput="filterInput(this)"><br>
+    
+                        <label for="fDemandSeat">F-Class Demand</label>
+                        <input type="text" id="fDemandSeat" placeholder="F-Class Demand" maxlength="3" class="form-control" oninput="filterInput(this)"><br>
+    
+                        <button onclick="paxseats('Realism', 'Normal');
+                        $('#realSwSeat').css({ backgroundColor: '#103de0', boxShadow: '0 0 0 .2rem rgba(0,123,255,.25)' });
+                        $('#easySwSeat').css({ backgroundColor: '#107fe0', boxShadow: 'none' });
+                        $('#normSwSeat').css({ backgroundColor: '#103de0', boxShadow: '0 0 0 .2rem rgba(0,123,255,.25)' });
+                        $('#maxSwSeat').css({ backgroundColor: '#107fe0', boxShadow: 'none' })">Calculate!</button><br>
+    
+                        <!--<p id="seatTxt">If you want to keep the plane longer than
+                            <span id="repayTimeSeat"></span>days, use:
+                        </p>
+                        <label for="seatOutputY>">Economy Class Seats</label>
+                        <input type="number" id="seatOutputY" class="form-control" readonly><br>
+    
+                        <label for="seatOutputJ>">Business Class Seats</label>
+                        <input type="number" id="seatOutputJ" class="form-control" readonly><br>
+    
+                        <label for="seatOutputF>">First Class Seats</label>
+                        <input type="number" id="seatOutputF" class="form-control" readonly><br>
+    
+                        <p>Otherwise use this:</p>
+    
+                        <label for="seatAltY>">Economy Class Seats</label>
+                        <input type="number" id="seatAltY" class="form-control" readonly><br>
+    
+                        <label for="seatAltJ>">Business Class Seats</label>
+                        <input type="number" id="seatAltJ" class="form-control" readonly><br>
+                        
+                        <label for="seatAltF>">First Class Seats</label>
+                        <input type="number" id="seatAltF" class="form-control" readonly><br>-->
+                    </div>
+                    <div id="paxprofit" class="hide">
+                        <h4>PAX Profit Calculator</h4>
+    
+                        <!--<select id="modeSProfit" class="form-control">
+                            <option>Realism</option>
+                            <option>Easy</option>
+                        </select><br>-->
+    
+                        <label for="airplaneProfit">Aircraft Type</label>
+                        <input list="acList" type="text" id="airplaneProfit" placeholder="Aircraft Type" class="form-control"><br>
+    
+                        <label for="distanceProfit">Route Distance</label>
+                        <input type="text" id="distanceProfit" placeholder="Distance (km)" maxlength="5" class="form-control" oninput="filterInput(this)"><br>  
+    
+                        <label for="ySeatsProfit">Y-Class Seats</label>
+                        <input type="text" id="ySeatsProfit" placeholder="Y-Class Seats" maxlength="3" class="form-control" oninput="filterInput(this)"><br>
+    
+                        <label for="jSeatsProfit">J-Class Seats</label>
+                        <input type="text" id="jSeatsProfit" placeholder="J-Class Seats" maxlength="3" class="form-control" oninput="filterInput(this)"><br>
+    
+                        <label for="fSeatsProfit">F-Class Seats</label>
+                        <input type="text" id="fSeatsProfit"  placeholder="F-Class Seats" maxlength="3" class="form-control" oninput="filterInput(this)"><br>
+    
+                        <label for="flDayProfit">Flights Per Day</label>
+                        <input type="text" id="flDayProfit" placeholder="Flights Per Day" maxlength="2" class="form-control" oninput="filterInput(this)"><br> 
+    
+                        <label for="reptProfit">Reputation</label>
+                        <input type="text" id="reptProfit" placeholder="Reputation (%)" max="99" maxlength="2" class="form-control" oninput="filterInput(this)"><br>   
+    
+                        <label for="fPrxProfit">Fuel Price</label>
+                        <input type="text" id="fPrxProfit" placeholder="Fuel Price / 1000 lbs" maxlength="4" class="form-control" oninput="filterInput(this)"><br>  
+    
+                        <label for="cPrxProfit">CO2 Quota Price</label>
+                        <input type="text" id="cPrxProfit" placeholder="CO2 Price / 1000 quotas" maxlength="3" class="form-control" oninput="filterInput(this)"><br>
+    
+                        <datalist id="acList">
+                        </datalist>
+    
+                        <button onclick="paxprofit('Realism');
+                        $('#realSwPrf').css({ backgroundColor: '#103de0', boxShadow: '0 0 0 .2rem rgba(0,123,255,.25)' });
+                        $('#easySwPrf').css({ backgroundColor: '#107fe0', boxShadow: 'none' })">Calculate!</button><br><br>
+    
+                        <!--<label for="perFlightProfit">Profit Per Flight</label>
+                        <input type="text" id="perFlightProfit" class="form-control" readonly><br>  
+                        
+                        <label for="perDayProfit">Profit Per Day</label>
+                        <input type="text" id="perDayProfit" class="form-control" readonly><br>-->
+                    </div>
+                    <div id="cticket" class="hide">
+                        <h4>Cargo Ticket Calculator</h4>
+                        <label for="distanceCTicket">Route Distance</label>
+                        <input type="text" id="distanceCTicket" placeholder="Distance (km)" maxlength="5" class="form-control" oninput="filterInput(this)"><br>
+    
+                        <button onclick="cticket()">Calculate!</button><br><br>
+    
+                        <!--<label for="lTicketRealism">Large Load (Realism)</label>
+                        <input type="text" id="lTicketRealism" class="form-control" readonly><br>
+    
+                        <label for="hTicketRealism">Heavy Load (Easy)</label>
+                        <input type="text" id="hTicketRealism" class="form-control" readonly><br>
+    
+                        <label for="lTicketEasy">Large Load (Realism)</label>
+                        <input type="text" id="lTicketEasy" class="form-control" readonly><br>
+    
+                        <label for="hTicketEasy">Heavy Load (Realism)</label>
+                        <input type="text" id="hTicketEasy" class="form-control" readonly><br>-->
+                    </div>
+                    <div id="cconfig" class="hide">
+                        <h4>Cargo Configuration Calculator</h4>
+
+                        <!--<select id="cModeLoad" class="form-control">
+                            <option>Normal</option>
+                            <option>Max. Demand Usage</option>
+                        </select><br>-->
+
+                        <label for="largeTraining" id="tr1">Large Load Training --0/6</label>
+                        <input type="range" id="largeTraining" min="0" max="6" value="0" class="slider">
+
+                        <label for="heavyTraining" id="tr2">Heavy Load Training --0/6</label>
+                        <input type="range" id="heavyTraining" min="0" max="6" value="0" class="slider">
+
+                        <label for="capacityLoad">Capacity</label>
+                        <input type="text" id="capacityLoad" placeholder="Capacity" maxlength="6" class="form-control" oninput="filterInput(this)"><br>
+    
+                        <label for="lDemandLoad">Large Load Demand</label>
+                        <input type="text" id="lDemandLoad" placeholder="Large Load Demand (lbs/day)" maxlength="7" class="form-control" oninput="filterInput(this)"><br>
+    
+                        <label for="hDemandLoad">Heavy Load Demand</label>
+                        <input type="text" id="hDemandLoad" placeholder="Heavy Load Demand (lbs/day)" maxlength="8" class="form-control" oninput="filterInput(this)"><br>
+    
+                        <label for="flDayLoad">Flights Per Day</label>
+                        <input type="text" id="flDayLoad" placeholder="Flights Per Day" maxlength="2" class="form-control" oninput="filterInput(this)"><br>
+    
+                        <button onclick="cseats('Normal');
+                        $('#normSwcs').css({ backgroundColor: '#103de0', boxShadow: '0 0 0 .2rem rgba(0,123,255,.25)' });
+                        $('#maxSwcs').css({ backgroundColor: '#107fe0', boxShadow: 'none' })">Calculate!</button><br><br>
+                        
+                        <!--<label for="largeOutput">Large Load</label>
+                        <input type="text" id="largeOutput" class="form-control" readonly><br>
+    
+                        <label for="heavyOutput">Capacity</label>
+                        <input type="text" id="heavyOutput" class="form-control" readonly><br>-->
+                    </div>
+                    <div id="cprofit" class="hide">
+                        <h4>Cargo Profit Calculator</h4>
+
+                        <!--<select id="modeSCP" class="form-control">
+                            <option>Realism</option>
+                            <option>Easy</option>
+                        </select><br>-->
+
+                        <label for="airplaneCP">Aircraft Type</label>
+                        <input list="cargolist" type="text" id="airplaneCP" placeholder="Aircraft Type" class="form-control"><br>
+        
+                        <label for="distanceCP">Route Distance</label>
+                        <input type="text" id="distanceCP" placeholder="Distance (km)" maxlength="5" class="form-control" oninput="filterInput(this)"><br>   
+        
+                        <label for="lCapCP">Large Load Capacity</label>
+                        <input type="text" id="lCapCP" placeholder="Large Load Capacity (lbs)" maxlength="6" class="form-control" oninput="filterInput(this)"><br>  
+        
+                        <label for="hCapCP">Heavy Load Capacity</label>
+                        <input type="text" id="hCapCP" placeholder="Heavy Load Capacity (lbs)" maxlength="6" class="form-control" oninput="filterInput(this)"><br> 
+        
+                        <label for="flDayCP">Flights Per Day</label>
+                        <input type="text" id="flDayCP" placeholder="Flights Per Day" maxlength="2" class="form-control" oninput="filterInput(this)"><br>    
+        
+                        <label for="reptCP">Reputation</label>
+                        <input type="text" id="reptCP" placeholder="Reputation (%)" max="99" maxlength="2" class="form-control" oninput="filterInput(this)"><br> 
+        
+                        <label for="fPrxCP">Fuel Price</label>
+                        <input type="text" id="fPrxCP" placeholder="Fuel Price / 1000 lbs" maxlength="4" class="form-control" oninput="filterInput(this)"><br>
+        
+                        <label for="cPrxCP">CO2 Quota Price</label>
+                        <input type="text" id="cPrxCP" placeholder="CO2 Price / 1000 quotas" maxlength="3" class="form-control" oninput="filterInput(this)"><br>
+        
+                        <button onclick="cprofit('Realism');
+                        $('#realSwcp').css({ backgroundColor: '#103de0', boxShadow: '0 0 0 .2rem rgba(0,123,255,.25)' });
+                        $('#easySwcp').css({ backgroundColor: '#107fe0', boxShadow: 'none' })">Calculate!</button><br><br>
+        
+                        <datalist id="cargolist">
+                            <option value="DC3"></option>
+                            <option value="DC9"></option>
+                            <option value="B727-200F"></option>
+                            <option value="B377SG"></option>
+                            <option value="A310-300F"></option>
+                            <option value="A400M"></option>
+                            <option value="IL-76D"></option>
+                            <option value="B757-200F"></option>
+                            <option value="A300-600F"></option>
+                            <option value="IL-96T"></option>
+                            <option value="B767-300F"></option>
+                            <option value="A330-200F"></option>
+                            <option value="B777 Freighter"></option>
+                            <option value="B747-400F"></option>
+                            <option value="B747-8F"></option>
+                            <option value="AN-124"></option>
+                            <option value="A380-800F"></option>
+                            <option value="AN-225"></option>
+                        </datalist> 
+        
+                        <!--<label for="flightProfitC">Profit Per Flight</label>
+                        <input type="text" id="flightProfitC" class="form-control" readonly><br>
+        
+                        <label for="dayProfitC">Profit Per Day</label>
+                        <input type="text" id="dayProfitC" class="form-control" readonly><br>-->
+                    </div>
+                    <div id="stopover" class="hide">
+                        <h4>Stopover Finder</h4>
+                        <label for="departStopover">Departure</label>
+                        <input list="depListStopover" type="text" id="departStopover" placeholder="IATA/ICAO/City Name" class="form-control"><br>
+                        
+                        <label for="arrivalStopover">Destination</label>
+                        <input list="arrListStopover" type="text" id="arrivalStopover" placeholder="IATA/ICAO/City Name" class="form-control"><br>
+        
+                        <label for="rangeStopover">Aircraft Range</label>
+                        <input type="text" id="rangeStopover" placeholder="Range (km)" maxlength="5" class="form-control" oninput="filterInput(this)"><br>
+                        
+                        <label for="rwyStopover">Runway Requirement (optional)</label>
+                        <input type="text" id="rwyStopover" placeholder="Runway Requirement (ft)" maxlength="5" class="form-control" oninput="filterInput(this)"><br>
+        
+                        <button onclick="search()">Search!</button><br><br>
+        
+                        <!--<label for="stopoverStopover">Stopover Airport</label>
+                        <input type="text" id="stopoverStopover" class="form-control" placeholder="Stopover Airport" readonly><br>
+    
+                        <label for="iciaStopover">IATA/ICAO</label>
+                        <input type="text" id="iciaStopover" class="form-control" placeholder="IATA/ICAO" readonly><br>
+    
+                        <label for="distanceStopover">Additional Distance</label>
+                        <input type="text" id="distanceStopover" class="form-control" placeholder="Additional Distance" readonly><br>
+    
+                        <label for="totDistStopover">Total Distance</label>
+                        <input type="text" id="totDistStopover" class="form-control" placeholder="total Distance" readonly><br>-->
+    
+                        <datalist id="depListStopover"></datalist>
+                        <datalist id="arrListStopover"></datalist>
+                    </div>
+                    <div id="marketmap" class="hide">
+                        <br>
+                        <br>
+                        <div id="mmp" style="margin-bottom: 40px"></div>
+                    </div>
+                    <div id="acsearch" class="hide">
+                        Will be added soon.
+                    </div>
+                    <div id="marketfind" class="hide">
+                        Will be added soon.
+                    </div>
+                    <div id="resell" class="hide">
+                        <h4>Resell Value Calculator</h4>
+    
+                        <label for="airplaneResell">Aircraft Type</label>
+                        <input list="acListResell" type="text" id="airplaneResell" placeholder="Aircraft Type" class="form-control"><br>
+    
+                        <label for="marketPercentResell">Market%</label>
+                        <input type="text" id="marketPercentResell" placeholder="Market Percent" maxlength="2" class="form-control" oninput="filterInput(this)"><br>
+    
+                        <label for="jSeatsResell">J-Class Seats</label>
+                        <input type="text" id="jSeatsResell" placeholder="J-Class Seats" maxlength="3" class="form-control" oninput="filterInput(this)"><br>
+    
+                        <label for="fSeatsResell">F-Class Seats</label>
+                        <input type="text" id="fSeatsResell" placeholder="F-Class Seats" maxlength="4" class="form-control" oninput="filterInput(this)"><br>
+    
+                        <label for="hoursResell">Flight Hours</label>
+                        <input type="text" id="hoursResell" placeholder="Flight Hours" maxlength="5" class="form-control" oninput="filterInput(this)"><br>
+    
+                        <button onclick="resell()">Calculate!</button><br><br>
+    
+                        <!--<label for="resellV">Resell Value</label>
+                        <input type="text" id="resellV" class="form-control" readonly>-->
+                        
+                        <datalist id="acListResell">
+                        </datalist>
+                    </div>
+                    <div id="about" class="hide">
+                        <p>Will be added soon</p>
+                    </div>
+                    <div id="faq" class="hide">
+                        <p>Will be added soon</p>
+                    </div>
+                    <div id="am4" class="hide">
+                        <div class="h-header">
+                            Airline Manager 4
+                        </div>
+                        <div class="b-scr-read-box">
+                            <p id="am4-upper-p">
+                                In Airline Manager 4, you start an airline from scratch.
+                                All you have to egin with is a few million dollars, and a
+                                single aircraft.<br>
+                                Do you have what it takes to run an airline?
+                            </p>
+                            <p id="am4-scd-p">
+                                Always wanted to run an airline?<br>
+                                Well, this is your change. But if you thought it was easy,
+                                think again. There are many tasks that must be done to become
+                                successful, and your staff are not much help - they also have to be
+                                managed.<br>
+                                Which aircraft will you purchase, and will your routes be profitable?<br>
+                                Sign up today and get started with your airline - it's free and 100% ad free.
+                                <ul id="am4-list">
+                                    <li>
+                                        Purchase aircrafts from the market with a selection of
+                                        more than 350 different aircraft
+                                    </li>
+                                    <li>
+                                        Create routes from more than 4000 real life airports
+                                    </li>
+                                    <li>
+                                        Track your flights live on the map
+                                    </li>
+                                    <li>
+                                        Purchase hubs all over the world
+                                    </li>
+                                    <li>
+                                        Keep your fleet maintained
+                                    </li>
+                                    <li>
+                                        Handle your staff
+                                    </li>
+                                </ul>
+                            </p>
+                            <button onclick="window.location.href='https://airline4.net'" id="am-pl-btn">
+                                <i class="fa fa-plane"></i>
+                                Play AM4
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer" onmouseover="footer()" id="footer">
+                <img src="https://www.airline4.net/assets/img/logos/am_logo.png" id="ft-am-img"></img>
+                <div id="ft-atxt">tools and guides for airline manager 4</div>
+                <div id="ft-btxt">am4 guides and tools</div>
+                <div id="ft-ctxt">am4info.com</div>
+            </div>
+            <div class="ft-main-str" id="ft-main-str" onmouseover="$('.ft-main-str').show(); $('.footer').css({ bottom: '140px' })">
+                <div class="ft-col" id="ft-left-col">
+                    <p>INFO</p>
+                    <ul>
+                        <li>
+                            <i class="fa fa-book"></i>Guide library
+                        </li>
+                        <li>
+                            <i class="fa fa-language"></i>Languages
+                        </li>
+                        <li>
+                            <i class="fa fa-globe"></i>Request/Add Language
+                        </li>
+                    </ul>
+                </div>
+                <div class="ft-col" id="ft-m1-col">
+                    <p>DEVELOPMENT</p>
+                    <ul>
+                        <li>
+                            <i class="fa fa-warning"></i>Report a Bug
+                        </li>
+                        <li>
+                            <i class="fa fa-battery-4"></i>Status
+                        </li>
+                        <li>
+                            <i class="fa fa-bullhorn"></i>News & Change Log
+                        </li>
+                    </ul>
+                </div>
+                <div class="ft-col" id="ft-m2-col">
+                    <p>COMMUNITY</p>
+                    <ul>
+                        <li>
+                            <i class="fab fa-facebook"></i>Facebook Group
+                        </li>
+                        <li>
+                            <i class="fab fa-discord"></i>Discord Server
+                        </li>
+                        <li>
+                            <i class="fa fa-robot"></i>Discord Bot
+                        </li>
+                    </ul>
+                </div>
+                <div class="ft-col" id="ft-right-col">
+                    <p>MORE</p>
+                    <ul>
+                        <li>
+                            <i class="fa fa-book"></i>Guide Upload Terms
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope"></i>Contact
+                        </li>
+                        <li>
+                            <i class="fa fa-group"></i>Our Team
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--PAX TICKET-->
+            <div class="res-tab" id="res-tab1">
+                <div class="res-container" id="res-container1">
+                    <span class="res-arr-down" onclick="$(`#res-tab1`).animate({ bottom: '-700px' }); $(`#res-container1`).animate({ bottom: '-700px' })">&#8250</span><br>
+                    <button id="realSwTicket" class="switcher" onclick="$('#ticketOutpEasy').hide(); $('#ticketOutpRealism').fadeIn(); $('#realSwTicket').css({ backgroundColor: '#103de0', boxShadow: '0 0 0 .2rem rgba(0,123,255,.25)' }); $('#easySwTicket').css({ backgroundColor: '#107fe0', boxShadow: 'none' })">Realism</button>
+                    <button id="easySwTicket" class="switcher" onclick="$('#ticketOutpRealism').hide(); $('#ticketOutpEasy').fadeIn(); $('#easySwTicket').css({ backgroundColor: '#103de0', boxShadow: '0 0 0 .2rem rgba(0,123,255,.25)' }); $('#realSwTicket').css({ backgroundColor: '#107fe0', boxShadow: 'none' })">Easy</button>
+                    <div id="ticketOutpRealism">
+                        <div class="resp-type"><img src="https://www.airline4.net/assets/img/aircraft/configuration/economy_seat.png" style="height: 22px; width: 18px; margin-right: 10px;"></img>Economy Class</div><div class="resp" id="yTicketRealism">Text</div><br><br>
+                        <div class="resp-type"><img src="https://www.airline4.net/assets/img/aircraft/configuration/business_seat.png" style="height: 22px; width: 18px; margin-right: 10px;"></img>Business Class</div><div class="resp" id="jTicketRealism">Text</div><br><br>
+                        <div class="resp-type"><img src="https://www.airline4.net/assets/img/aircraft/configuration/first_seat.png" style="height: 22px; width: 30px; margin-right: 10px;"></img>First Class</div><div class="resp" id="fTicketRealism">Text</div><br><br>
+                    </div>
+                    <div id="ticketOutpEasy">
+                        <div class="resp-type"><img src="https://www.airline4.net/assets/img/aircraft/configuration/economy_seat.png" style="height: 22px; width: 18px; margin-right: 10px;"></img>Economy Class</div><div class="resp" id="yTicketEasy">Text</div><br><br>
+                        <div class="resp-type"><img src="https://www.airline4.net/assets/img/aircraft/configuration/business_seat.png" style="height: 22px; width: 18px; margin-right: 10px;"></img>Business Class</div><div class="resp" id="jTicketEasy">Text</div><br><br>
+                        <div class="resp-type"><img src="https://www.airline4.net/assets/img/aircraft/configuration/first_seat.png" style="height: 22px; width: 30px; margin-right: 10px;"></img>First Class</div><div class="resp" id="fTicketEasy">Text</div><br><br>
+                    </div>
+                </div>
+            </div>
+            <!--PAX CONFIG-->
+            <div class="res-tab" id="res-tab2">
+                <div class="res-container" id="res-container2">
+                    <span class="res-arr-down" onclick="$(`#res-tab2`).animate({ bottom: '-700px' }); $(`#res-container2`).animate({ bottom: '-700px' })">&#8250</span><br>
+                    <button id="realSwSeat" class="switcherW" onclick="paxseats('Realism', detNormAlt()); $('#realSwSeat').css({ backgroundColor: '#103de0', boxShadow: '0 0 0 .2rem rgba(0,123,255,.25)' }); $('#easySwSeat').css({ backgroundColor: '#107fe0', boxShadow: 'none' })">Realism</button>
+                    <button id="easySwSeat" class="switcherW" onclick="paxseats('Easy', detNormAlt()); $('#easySwSeat').css({ backgroundColor: '#103de0', boxShadow: '0 0 0 .2rem rgba(0,123,255,.25)' }); $('#realSwSeat').css({ backgroundColor: '#107fe0', boxShadow: 'none' })">Easy</button><br>
+                    <button id="normSwSeat" class="switcherW" onclick="paxseats(detRealEasy(), 'Normal'); $('#normSwSeat').css({ backgroundColor: '#103de0', boxShadow: '0 0 0 .2rem rgba(0,123,255,.25)' }); $('#maxSwSeat').css({ backgroundColor: '#107fe0', boxShadow: 'none' })">Normal</button>
+                    <button id="maxSwSeat" class="switcherW" onclick="paxseats(detRealEasy(), 'Max'); $('#maxSwSeat').css({ backgroundColor: '#103de0', boxShadow: '0 0 0 .2rem rgba(0,123,255,.25)' }); $('#normSwSeat').css({ backgroundColor: '#107fe0', boxShadow: 'none' })">Max. Demand</button>
+                    <div id="seatOutpProfit">
+                        <div class="resp-type" style="margin-bottom: 10px; margin-right: 15px;">This is the most profitable configuration, but it's also more expensive:</div><br>
+                        <div class="resp-type"><img src="https://www.airline4.net/assets/img/aircraft/configuration/economy_seat.png" style="height: 22px; width: 18px; margin-right: 10px;"></img>Economy Class Seats</div><div class="resp" id="ySeatFirst">Text</div><br><br>
+                        <div class="resp-type"><img src="https://www.airline4.net/assets/img/aircraft/configuration/business_seat.png" style="height: 22px; width: 18px; margin-right: 10px;"></img>Business Class Seats</div><div class="resp" id="jSeatFirst">Text</div><br><br>
+                        <div class="resp-type"><img src="https://www.airline4.net/assets/img/aircraft/configuration/first_seat.png" style="height: 22px; width: 30px; margin-right: 10px;"></img>First Class Seats</div><div class="resp" id="fSeatFirst">Text</div><br><br>
+                    </div>
+                    <div id="seatOutpAlt">
+                        <div class="resp-type" style="margin-bottom: 10px; margin-right: 15px;">Please use the configuration shown below if you won't keep your plane longer than <span id="seatAltDays"></span> days:</div>
+                        <div class="resp-type"><img src="https://www.airline4.net/assets/img/aircraft/configuration/economy_seat.png" style="height: 22px; width: 18px; margin-right: 10px;"></img>Economy Class Seats</div><div class="resp" id="ySeatAlt">Text</div><br><br>
+                        <div class="resp-type"><img src="https://www.airline4.net/assets/img/aircraft/configuration/business_seat.png" style="height: 22px; width: 18px; margin-right: 10px;"></img>Business Class Seats</div><div class="resp" id="jSeatAlt">Text</div><br><br>
+                        <div class="resp-type"><img src="https://www.airline4.net/assets/img/aircraft/configuration/first_seat.png" style="height: 22px; width: 30px; margin-right: 10px;"></img>First Class Seats</div><div class="resp" id="fSeatAlt">Text</div><br><br>
+                        <div class="resp-type">Preference</div><div class="resp" id="seatPref"></div><br><br>
+                    </div>
+                </div>
+            </div>
+            <!--PAX PROFIT-->
+            <div class="res-tab" id="res-tab3">
+                <div class="res-container" id="res-container3">
+                    <span class="res-arr-down" onclick="$(`#res-tab3`).animate({ bottom: '-700px' }); $(`#res-container3`).animate({ bottom: '-700px' })">&#8250</span><br>
+                    <button id="realSwPrf" class="switcher" onclick="paxprofit('Realism'); $('#realSwPrf').css({ backgroundColor: '#103de0', boxShadow: '0 0 0 .2rem rgba(0,123,255,.25)' }); $('#easySwPrf').css({ backgroundColor: '#107fe0', boxShadow: 'none' })">Realism</button>
+                    <button id="easySwPrf" class="switcher" onclick="paxprofit('Easy'); $('#easySwPrf').css({ backgroundColor: '#103de0', boxShadow: '0 0 0 .2rem rgba(0,123,255,.25)' }); $('#realSwPrf').css({ backgroundColor: '#107fe0', boxShadow: 'none' })">Easy</button>
+                    <div id="prfOutput">
+                        <div class="resp-type">Profit Per Flight</div><div class="resp" id="perFlightProfit">Text</div><br><br>
+                        <div class="resp-type">Profit Per Day</div><div class="resp" id="perDayProfit">Text</div><br><br>
+                        <div class="resp-type">Additional Info (per flight):</div><br><br>
+                        <div class="resp-type"><i class="gas-pump-emoji">⛽</i>  Fuel Usage</div><div class="resp" id="fuelUsageProfit">Text</div><br><br>
+                        <div class="resp-type"><i class="gas-pump-emoji">⛽</i>  Fuel Cost</div><div class="resp" id="fuelCostProfit">Text</div><br><br>
+                        <div class="resp-type"><i class="fa fa-leaf" style="color: #00ff00"></i>  Quota Usage</div><div class="resp" id="coUsageProfit">Text</div><br><br>
+                        <div class="resp-type"><i class="fa fa-leaf" style="color: #00ff00"></i>  Quota Cost</div><div class="resp" id="coCostProfit">Text</div><br><br>
+                        <div class="resp-type"><i class="fa fa-wrench" style="color: #aaa"></i>  Maintenance</div><div class="resp" id="maintProfit">Text</div><br><br>
+                    </div>
+                </div>
+            </div>
+            <!--CARGO TICKET-->
+            <div class="res-tab" id="res-tab4">
+                <div class="res-container" id="res-container4">
+                    <span class="res-arr-down" onclick="$(`#res-tab4`).animate({ bottom: '-700px' }); $(`#res-container4`).animate({ bottom: '-700px' })">&#8250</span><br>
+                    <button id="realSwct" class="switcher" onclick="$('#ctOutpEasy').hide(); $('#ctOutpRealism').fadeIn(); $('#realSwct').css({ backgroundColor: '#103de0', boxShadow: '0 0 0 .2rem rgba(0,123,255,.25)' }); $('#easySwct').css({ backgroundColor: '#107fe0', boxShadow: 'none' })">Realism</button>
+                    <button id="easySwct" class="switcher" onclick="$('#ctOutpRealism').hide(); $('#ctOutpEasy').fadeIn(); $('#easySwct').css({ backgroundColor: '#103de0', boxShadow: '0 0 0 .2rem rgba(0,123,255,.25)' }); $('#realSwct').css({ backgroundColor: '#107fe0', boxShadow: 'none' })">Easy</button>
+                    <div id="ctOutpRealism">
+                        <div class="resp-type"><i class="fa fa-boxes" style="color: #ffc107"></i>  Large Load</div><div class="resp" id="lTicketRealism">Text</div><br><br>
+                        <div class="resp-type"><i class="fa fa-boxes" style="color: #dc3545"></i>  Heavy Load</div><div class="resp" id="hTicketRealism">Text</div><br><br>
+                    </div>
+                    <div id="ctOutpEasy">
+                        <div class="resp-type"><i class="fa fa-boxes" style="color: #ffc107"></i>  Large Load</div><div class="resp" id="lTicketEasy">Text</div><br><br>
+                        <div class="resp-type"><i class="fa fa-boxes" style="color: #dc3545"></i>  Heavy Load</div><div class="resp" id="hTicketEasy">Text</div><br><br>
+                    </div>
+                </div>
+            </div>
+            <!--CARGO SEATS-->
+            <div class="res-tab" id="res-tab5">
+                <div class="res-container" id="res-container5">
+                    <span class="res-arr-down" onclick="$(`#res-tab5`).animate({ bottom: '-700px' }); $(`#res-container5`).animate({ bottom: '-700px' })">&#8250</span><br>
+                    <button id="normSwcs" class="switcherW" onclick="cseats('Normal'); $('#normSwcs').css({ backgroundColor: '#103de0', boxShadow: '0 0 0 .2rem rgba(0,123,255,.25)' }); $('#maxSwcs').css({ backgroundColor: '#107fe0', boxShadow: 'none' })">Normal</button>
+                    <button id="maxSwcs" class="switcherW" onclick="cseats('Max. Demand Usage'); $('#maxSwcs').css({ backgroundColor: '#103de0', boxShadow: '0 0 0 .2rem rgba(0,123,255,.25)' }); $('#normSwcs').css({ backgroundColor: '#107fe0', boxShadow: 'none' })">Max. Demand</button><br>
+                    <div class="resp-type">Large Load</div><div class="resp" id="largeOutput"></div><br><br>
+                    <div class="resp-type">Heavy Load</div><div class="resp" id="heavyOutput"></div><br><br>
+                </div>
+            </div>
+            <!--CARGO PROFIT-->
+            <div class="res-tab" id="res-tab6">
+                <div class="res-container" id="res-container6">
+                    <span class="res-arr-down" onclick="$(`#res-tab6`).animate({ bottom: '-700px' }); $(`#res-container6`).animate({ bottom: '-700px' })">&#8250</span><br>
+                    <button id="realSwcp" class="switcher" onclick="cprofit('Realism'); $('#realSwcp').css({ backgroundColor: '#103de0', boxShadow: '0 0 0 .2rem rgba(0,123,255,.25)' }); $('#easySwcp').css({ backgroundColor: '#107fe0', boxShadow: 'none' })">Realism</button>
+                    <button id="easySwcp" class="switcher" onclick="cprofit('Easy'); $('#easySwcp').css({ backgroundColor: '#103de0', boxShadow: '0 0 0 .2rem rgba(0,123,255,.25)' }); $('#realSwcp').css({ backgroundColor: '#107fe0', boxShadow: 'none' })">Easy</button>
+                    <div id="prfOutputcp">
+                        <div class="resp-type">Profit Per Flight</div><div class="resp" id="perFlightProfitc">Text</div><br><br>
+                        <div class="resp-type">Profit Per Day</div><div class="resp" id="perDayProfitc">Text</div><br><br>
+                        <div class="resp-type">Additional Info (per flight):</div><br><br>
+                        <div class="resp-type"><i class="gas-pump-emoji">⛽</i>  Fuel Usage</div><div class="resp" id="fuelUsageProfitc">Text</div><br><br>
+                        <div class="resp-type"><i class="gas-pump-emoji">⛽</i>  Fuel Cost</div><div class="resp" id="fuelCostProfitc">Text</div><br><br>
+                        <div class="resp-type"><i class="fa fa-leaf" style="color: #00ff00"></i>  Quota Usage</div><div class="resp" id="coUsageProfitc">Text</div><br><br>
+                        <div class="resp-type"><i class="fa fa-leaf" style="color: #00ff00"></i>  Quota Cost</div><div class="resp" id="coCostProfitc">Text</div><br><br>
+                        <div class="resp-type"><i class="fa fa-wrench" style="color: #aaa"></i>  Maintenance</div><div class="resp" id="maintProfitc">Text</div><br><br>
+                    </div>
+                </div>
+            </div>
+            <!--STOPOVER-->
+            <div class="res-tab" id="res-tab7">
+                <div class="res-container" id="res-container7">
+                    <span class="res-arr-down" onclick="$(`#res-tab7`).animate({ bottom: '-700px' }); $(`#res-container7`).animate({ bottom: '-700px' })">&#8250</span><br>
+                    <div class="resp-type">Airport</div><div class="resp" id="stopoverStopover"></div><br><br>
+                    <div class="resp-type">Extra Distance</div><div class="resp" id="distanceStopover"></div><br><br>
+                    <div class="resp-type">Total Distance</div><div class="resp" id="totDistStopover"></div><br><br>
+                    <div class="resp-type">ICAO/IATA</div><div class="resp" id="iciaStopover"></div><br><br>
+                </div>
+            </div>
+            <!--RESELL-->
+            <div class="res-tab" id="res-tab8">
+                <div class="res-container" id="res-container8">
+                    <span class="res-arr-down" onclick="$(`#res-tab8`).animate({ bottom: '-700px' }); $(`#res-container8`).animate({ bottom: '-700px' })">&#8250</span><br>
+                    <div class="resp-type"><i class="fa fa-hand-holding-usd" style="color: #82c91e"></i>  Resell Value</div><div class="resp" id="resellV"></div>
+                </div>
+            </div>
+            <script src="script.js" type="text/javascript"></script>
+            <script src="profitscript.js" type="text/javascript"></script>
+            <script src="stopover.js" type="text/javascript"></script>
+            <script src="market.js" type="text/javascript"></script>
+            <script src="resell.js" type="text/javascript"></script>
+            <script>
+                //wide navbar
+                function droppax() {
+                    if(document.getElementsByClassName("dropdown2")[0].style.display == "none") {
+                        $(".dropdown2").slideDown()
+                    }
+                    if(document.getElementsByClassName("dropdown3")[0].style.display != "none") {
+                        $(".dropdown3").slideUp()
+                    }
+                    if(document.getElementsByClassName("dropdown4")[0].style.display != "none") {
+                        $(".dropdown4").slideUp()
+                    }
+                    if(document.getElementsByClassName("dropdown5")[0].style.display != "none") {
+                        $(".dropdown5").slideUp()
+                    }
+                    if(document.getElementsByClassName("dropdown6")[0].style.display != "none") {
+                        $(".dropdown6").slideUp()
+                    }
+                }
+                function paxUp() {
+                    $(".dropdown2").slideUp()
+                }
+                function dropcargo() {
+                    if(document.getElementsByClassName("dropdown3")[0].style.display == "none") {
+                        $(".dropdown3").slideDown()
+                    }
+                    if(document.getElementsByClassName("dropdown2")[0].style.display != "none") {
+                        $(".dropdown2").slideUp()
+                    }
+                    if(document.getElementsByClassName("dropdown4")[0].style.display != "none") {
+                        $(".dropdown4").slideUp()
+                    }
+                    if(document.getElementsByClassName("dropdown5")[0].style.display != "none") {
+                        $(".dropdown5").slideUp()
+                    }
+                    if(document.getElementsByClassName("dropdown6")[0].style.display != "none") {
+                        $(".dropdown6").slideUp()
+                    }
+                }
+                function cargoUp() {
+                    $(".dropdown3").slideUp()
+                }
+                function dropother() {
+                    if(document.getElementsByClassName("dropdown4")[0].style.display == "none") {
+                        $(".dropdown4").slideDown()
+                    }
+                    if(document.getElementsByClassName("dropdown2")[0].style.display != "none") {
+                        $(".dropdown2").slideUp()
+                    }
+                    if(document.getElementsByClassName("dropdown3")[0].style.display != "none") {
+                        $(".dropdown3").slideUp()
+                    }
+                    if(document.getElementsByClassName("dropdown5")[0].style.display != "none") {
+                        $(".dropdown5").slideUp()
+                    }
+                    if(document.getElementsByClassName("dropdown6")[0].style.display != "none") {
+                        $(".dropdown6").slideUp()
+                    }
+                }
+                function otherUp() {
+                    $(".dropdown4").slideUp()
+                }
+                function droplang() {
+                    if(document.getElementsByClassName("dropdown5")[0].style.display == "none") {
+                        $(".dropdown5").slideDown()
+                    }
+                    if(document.getElementsByClassName("dropdown2")[0].style.display != "none") {
+                        $(".dropdown2").slideUp()
+                    }
+                    if(document.getElementsByClassName("dropdown3")[0].style.display != "none") {
+                        $(".dropdown3").slideUp()
+                    }
+                    if(document.getElementsByClassName("dropdown4")[0].style.display != "none") {
+                        $(".dropdown4").slideUp()
+                    }
+                    if(document.getElementsByClassName("dropdown6")[0].style.display != "none") {
+                        $(".dropdown6").slideUp()
+                    }
+                }
+                function langUp() {
+                    $(".dropdown5").slideUp()
+                }
+                function droproute() {
+                    if(document.getElementsByClassName("dropdown6")[0].style.display == "none") {
+                        $(".dropdown6").slideDown()
+                    }
+                    if(document.getElementsByClassName("dropdown2")[0].style.display != "none") {
+                        $(".dropdown2").slideUp()
+                    }
+                    if(document.getElementsByClassName("dropdown3")[0].style.display != "none") {
+                        $(".dropdown3").slideUp()
+                    }
+                    if(document.getElementsByClassName("dropdown4")[0].style.display != "none") {
+                        $(".dropdown4").slideUp()
+                    }
+                    if(document.getElementsByClassName("dropdown5")[0].style.display != "none") {
+                        $(".dropdown5").slideUp()
+                    }
+                }
+                function routeUp() {
+                    $(".dropdown6").slideUp()
+                }
+                //thin navbar
+                function mainContentSlide() {
+                    $(".drop-m-content").slideToggle()
+                    $(".drop-content2").fadeOut(1)
+                    $(".drop-content3").fadeOut(1)
+                    $(".drop-content4").fadeOut(1)
+                    $(".drop-content5").fadeOut(1)
+                    $(".drop-content6").fadeOut(1)
+                }
+                function mainContentUp() {
+                    $(".drop-m-content").slideUp()
+                    $(".drop-content2").fadeOut(1)
+                    $(".drop-content3").fadeOut(1)
+                    $(".drop-content4").fadeOut(1)
+                    $(".drop-content5").fadeOut(1)
+                    $(".drop-content6").fadeOut(1)
+                }
+                function pDrop() {
+                    $(".drop-content2").slideToggle()
+                }
+                function cDrop() {
+                    $(".drop-content3").slideToggle()
+                }
+                function rDrop() {
+                    $(".drop-content4").slideToggle()
+                }
+                function oDrop() {
+                    $(".drop-content5").slideToggle()
+                }
+                function lDrop() {
+                    $(".drop-content6").slideToggle()
+                }
+                //other
+                function toggleFooter() {
+                    $(".ft-main-str").slideToggle()
+                }
+                var largeT = document.getElementById("largeTraining")
+                largeT.oninput = function() {
+                    document.getElementById("tr1").innerHTML = "Large Load Training --" + this.value + "/6"
+                }
+                var heavyT = document.getElementById("heavyTraining")
+                heavyT.oninput = function() {
+                    document.getElementById("tr2").innerHTML = "Heavy Load Training --" + this.value + "/6"
+                }
+            </script>
+        </div>
+    </body>
+</html>

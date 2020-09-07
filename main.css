@@ -1,0 +1,459 @@
+/*#repayTimeSeat {
+    background-color: grey;
+    margin: 7px;
+    /*width: 15px;*//*
+    box-sizing: content-box;
+    border: 1px solid #000000;
+    border-radius: 6px;
+    font-size: 12px;
+    color: #000;
+    background-color: #ffffff;
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    padding: 8px 15px 8px 30px;
+    transition: width 0.4s ease-in-out;
+    width: 80%;
+}*/
+#mmp {
+    height: 75vh;
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+* {
+    outline: 0;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.hide {
+    display: none;
+}
+.topimg {
+    width: 26px;
+    height: 16px;
+}
+/*.content input, select, option {
+    width: 90%;
+    max-width: 250px;
+    padding: 8px 20px;
+    margin: auto;
+    display: block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    border-radius: 6px;
+}
+.content input:hover, select:hover, option:hover {
+    box-shadow: 0px 0px 7px #103de0;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}*/
+.form-control {
+    display: block;
+    width: 90%;
+    max-width: 250px;
+    padding: 8px 20px;
+    color: #495057;
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    margin: auto;
+}
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
+}
+.slider {
+    width: 90%;
+    max-width: 250px;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    background: #fff;
+    border-radius: 5px;
+    border: 0.2px solid #459057;
+}
+  
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #fff;
+}
+  
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    background: #fff;
+    border-radius: 5px;
+    border: 0.2px solid #495057;
+}
+  
+input[type=range]::-ms-track {
+    width: 100%;
+    height: 8.4px;
+    cursor: pointer;
+    background: transparent;
+    border-color: transparent;
+    border-width: 16px 0;
+    border-radius: 5px;
+    color: transparent;
+}
+.label-form {
+    width: 90%;
+    max-width: 250px;
+    margin: auto;
+}
+.content button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+.content button:hover {
+    background-color: #268129;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+label {
+    display: block;
+}
+.alert {
+  position: fixed;
+  width: 90%;
+  max-width: 250px;
+  top: 52px;
+  padding: 20px;
+  background-color: #fa3737;
+  border: 1px #a1000b;
+  border-radius: 6px;
+  color: white;
+  margin: auto;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.closebtn:hover {
+    color: black;
+}
+body {
+    margin: 0;
+    padding: 0;
+}
+.b-scr-read-box {
+    background-color: rgb(61, 147, 255);
+    width: 100%;
+    max-width: 550px;
+    padding-top: 0px;
+    margin: auto;
+    border-radius: 5.7px;
+}
+#h-tit-txt {
+    text-align: left;
+    font-family: 'Baloo Thambi 2';
+    margin-top: 25px;
+    font-size: 40px;
+    color: #fff;
+    margin-left: 25px;
+}
+#h-main-txt {
+    text-align: justify;
+    font-family: infoFont;
+    margin-top: -15px;
+    color: #fff;
+}
+.upperElement {
+    text-align: left;
+}
+.lowerElement {
+    text-align: justify;
+}
+.h-header {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 30px;
+    font-family: 'Baloo Thambi 2';
+}
+@font-face {
+    font-family: infoFont;
+    src: url('lvnm.ttf');
+}
+dl, dt, dd {
+    font-family: infoFont;
+    color: #fff;
+    font-size: 17px;
+}
+dt {
+    line-height: 230%;
+}
+dl a {
+    color: #103de0;
+}
+#am4 p, #am4 ul li {
+    text-align: left;
+}
+#am4-upper-p {
+    padding-top: 15px;
+    margin-left: 12px;
+    margin-right: 12px;
+    font-family: infoFont;
+    font-size: 17px;
+    color: #fff;
+}
+#am4-scd-p, #am4-list {
+    margin-left: 12px;
+    margin-right: 12px;
+    font-family: infoFont;
+    font-size: 17px;
+    color: #fff;
+}
+#am-pl-btn {
+    width: 90%;
+    margin-top: -5px;
+    margin-bottom: 5px;
+}
+.footer {
+    background-color: #107fe0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: left;
+    padding-top: 10px;
+    padding-bottom: 9px;
+}
+.ft-col {
+    display: inline-block;
+}
+#ft-left-col, #ft-m1-col, #ft-m2-col, #ft-right-col {
+    margin: 0px;
+    height: 140px;
+    padding-top: 0px;
+    width: 275px;
+}
+.ft-main-str {
+    background-color: #107fe0;
+    margin-top: -5px;
+    color: #fff;
+    text-align: center;
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 140px;
+}
+.ft-main-str:hover {
+    display: block;
+}
+#ft-am-img {
+    height: 40px;
+    width: 40px;
+    margin-left: 10px;
+}
+li i {
+    margin-right: 5px;
+    width: 25px;
+}
+.ft-col li {
+    text-align: left;
+    font-family: "Exo 2";
+}
+.ft-col p {
+    font-family: "Alegreya Sans SC";
+    font-size: 19px;
+    margin-bottom: -5px;
+}
+.ft-col ul {
+    padding-left: 70px;
+}
+@media screen and (max-width: 400px) {
+    #ft-atxt {
+        display: none;
+    }
+    #ft-btxt {
+        display: none;
+    }
+    #ft-ctxt {
+        display: inline-block;
+        font-family: 'Cinzel';
+        font-size: 25px;
+        line-height: 100%;
+        text-align: center;
+        position: absolute;
+        bottom: 20px;
+        left: 75px;
+        color: #fff;
+    }
+}
+@media screen and (max-width: 700px) and (min-width: 401px) {
+    #ft-atxt {
+        display: none;
+    }
+    #ft-btxt {
+        display: inline-block;
+        font-family: 'Cinzel';
+        font-size: 25px;
+        line-height: 100%;
+        text-align: center;
+        position: absolute;
+        bottom: 20px;
+        left: 75px;
+        color: #fff;
+    }
+    #ft-ctxt {
+        display: none;
+    }
+}
+@media screen and (min-width: 701px) {
+    #ft-atxt {
+        display: inline-block;
+        font-family: 'Cinzel';
+        font-size: 25px;
+        line-height: 100%;
+        text-align: center;
+        position: absolute;
+        bottom: 20px;
+        left: 75px;
+        color: #fff;
+    }
+    #ft-btxt {
+        display: none;
+    }
+    #ft-ctxt {
+        display: none;
+    }
+}
+.res-tab {
+    text-align: center;
+    margin: auto;
+}
+.res-container {
+    background-color: rgba(0, 0, 0, .9);
+    max-height: 90%;
+    width: 90%;
+    min-height: 30%;
+    max-width: 550px;
+    border-radius: 5px;
+    position: fixed;
+    bottom: -700px;
+    z-index: 50;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+.res-arr-down {
+    font-size: 30px;
+    color: #fff000;
+    cursor: grab;
+    display: inline-block;
+    transform: rotate(90deg);
+    margin-bottom: 15px;
+    margin-left: 7.2px;
+    margin-right: auto;
+}
+.resp-type {
+    float: left;
+    color: #fff;
+    margin-left: 15px;
+    font-size: 22px;
+}
+.resp {
+    text-align: right;
+    color: #fff;
+    margin-right: 15px;
+    font-size: 22px;
+}
+@media screen and (max-width: 400px) {
+    .resp-type {
+        font-size: 16px;
+    }
+    .resp {
+        font-size: 16px;
+    }
+}
+#ticketOutpEasy, #ctOutpEasy {
+    display: none;
+}
+.switcher {
+    width: 75px;
+    margin: auto;
+    color: #fff;
+    border: none;
+    height: 35px;
+    cursor: grab;
+    margin-bottom: 20px;
+}
+.switcherW {
+    width: 110px;
+    margin: auto;
+    color: #fff;
+    border: none;
+    height: 35px;
+    cursor: grab;
+    margin-bottom: 20px;
+}
+#realSwTicket, #realSwSeat, #normSwSeat, #realSwPrf, #realSwct, #realSwcp, #normSwcs {
+    background-color: #103de0;
+    box-shadow: 0 0 0 .2rem rgba(0,123,255,.25)
+}
+#easySwTicket, #easySwSeat, #maxSwSeat, #easySwPrf, #easySwct, #easySwcp, #maxSwcs {
+    background-color: #107fe0;
+}
+.res-container, .res-tab {
+    overflow: scroll;
+}
+.res-container::-webkit-scrollbar, .res-tab::-webkit-scrollbar, .t-cont::-webkit-scrollbar {
+    display: none;
+}
+.res-container, .res-tab, .t-cont {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+body {
+    margin-bottom: 70px;
+    padding-top: 55px;
+}
+.t-cont {
+    overflow: hidden;
+}
+.total-content {
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.total-content::-webkit-scrollbar {
+    display: none;
+}
+.gas-pump-emoji {
+    font-family: apple color emoji,segoe ui emoji,noto color emoji,android emoji,emojisymbols,emojione mozilla,twemoji mozilla,segoe ui symbol;
+}
